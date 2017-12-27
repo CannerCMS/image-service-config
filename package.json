@@ -1,0 +1,32 @@
+{
+  "name": "@canner/image-service-config",
+  "version": "0.0.1",
+  "description": "for image plugins to get service config ",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Canner/image-service-config.git"
+  },
+  "author": "canner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Canner/image-service-config/issues"
+  },
+  "homepage": "https://github.com/Canner/image-service-config#readme",
+  "dependencies": {
+    "promise-polyfill": "^7.0.0",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "peerDependencies": {
+    "@canner/canner-config": "^0.1.0",
+    "firebase": "^4.8.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
