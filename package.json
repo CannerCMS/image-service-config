@@ -1,6 +1,6 @@
 {
   "name": "@canner/image-service-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "for image plugins to get service config ",
   "main": "lib/index.js",
   "scripts": {
