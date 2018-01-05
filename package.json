@@ -20,7 +20,9 @@
   "homepage": "https://github.com/Canner/image-service-config#readme",
   "dependencies": {
     "promise-polyfill": "^7.0.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "@canner/canner-config": "^0.1.0",
+    "firebase": "^4.8.1"
   },
   "peerDependencies": {
     "@canner/canner-config": "^0.1.0",
