@@ -5,12 +5,12 @@ import CannerService from "./CannerService";
 export default function(config, payload) {
   const { service } = config;
   switch (service) {
-    case "firebase":
-      return new FirebaseService(config, payload);
+    case "canner":
+      return new CannerService(config, payload);
     case "imgur":
       return new ImgurService(config, payload);
-    case "canner":
+    case "firebase":
     default:
-      return new CannerService(config, payload);
+      return new FirebaseService(config, payload);
   }
 }
