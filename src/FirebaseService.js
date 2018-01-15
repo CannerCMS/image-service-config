@@ -10,7 +10,7 @@ export default class FirebaseService extends ImageService {
         // 登入應該要在 canner-web 的 qaformContainer 完成
         // 如果沒有登入 無法上傳
         const { file, onProgress, onSuccess, onError } = obj;
-        const app = config.getEndpointByKey(this.payload.key);
+        const app = config.getEndpointByKey(this.payload.key).app;
         const images = firebase
           .storage(app)
           .ref(`CANNER_CMS/${this.dir}`)
@@ -30,7 +30,7 @@ export default class FirebaseService extends ImageService {
             onSuccess({ data: { link: uploadTask.snapshot.downloadURL } });
           }
         );
-      }
+      }.bind(this)
     };
   }
 }
