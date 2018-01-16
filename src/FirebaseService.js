@@ -11,10 +11,13 @@ export default class FirebaseService extends ImageService {
         // 如果沒有登入 無法上傳
         const { file, onProgress, onSuccess, onError } = obj;
         const app = config.getEndpointByKey(this.payload.key).app;
+        const hash = randomString();
+        const fileExtension = file.name.split('.').slice().pop();
+        const filename = `${file.name}-${hash}.${fileExtension}`;
         const images = firebase
           .storage(app)
           .ref(`CANNER_CMS/${this.dir}`)
-          .child(this.filename || file.name);
+          .child(this.filename || filename);
         const uploadTask = images.put(file);
         uploadTask.on(
           firebase.storage.TaskEvent.STATE_CHANGED,
@@ -33,4 +36,8 @@ export default class FirebaseService extends ImageService {
       }.bind(this)
     };
   }
+}
+
+function randomString() {
+  return Math.random().toString(36).substr(2, 6);
 }
