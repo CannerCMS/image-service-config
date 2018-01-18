@@ -75,7 +75,7 @@ function randomString() {
 function getStorageUrl() {
   switch (process.env.NODE_ENV) {
     case "production":
-      return "https://backend.canner.io/upload";
+      return "https://backend.canner.io/storage";
     case "development":
     default:
       return "https://local.host:1234/storage";
