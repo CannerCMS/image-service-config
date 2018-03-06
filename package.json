@@ -4,11 +4,14 @@
   "description": "for image plugins to get service config ",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "eslint src test docs",
+    "clean": "rimraf lib dist",
     "build:flow": "flow-copy-source -v -i '**/test/**' src lib",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build": "npm run build:commonjs && npm run build:flow",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run build"
+    "prepublish": "npm run clean && npm run check:src && npm run build",
+    "check:src": "npm run lint",
+    "validate": "npm ls"
   },
   "repository": {
     "type": "git",
