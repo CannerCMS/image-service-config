@@ -1,6 +1,5 @@
 // @flow
 
-import firebase from "firebase";
 import ImageService from "./imageService";
 import config from "@canner/canner-config";
 import axios from "axios";
