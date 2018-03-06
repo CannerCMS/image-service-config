@@ -1,12 +1,20 @@
+// @flow
+
 import FirebaseService from "./FirebaseService";
 import ImgurService from "./ImgurService";
-import CannerService from "./CannerService";
 
-export default function(config, payload) {
+type Config = {
+  service: 'imgur' | 'firebase',
+  dir?: string,
+}
+
+type Payload = {
+  [string]: mixed
+}
+
+export default function(config: Config, payload: Payload) {
   const { service } = config;
   switch (service) {
-    case "canner":
-      return new CannerService(config, payload);
     case "imgur":
       return new ImgurService(config, payload);
     case "firebase":

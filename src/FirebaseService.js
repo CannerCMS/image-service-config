@@ -1,20 +1,35 @@
+// @flow
+
 import firebase from "firebase";
 import ImageService from "./imageService";
 import config from "@canner/canner-config";
 import axios from "axios";
 import Promise from "promise-polyfill";
 
+type RequestObj = {
+  file: File,
+  onProgress: (obj: {percent: number}) => void,
+  onSuccess: (obj: {data: {link: string}}) => void,
+  onError: (e: Error) => void,
+}
+
+type ServiceConfig = {
+  customRequest: RequestObj => Promise<*>
+}
+
 export default class FirebaseService extends ImageService {
-  getServiceConfig() {
+  dir: ?string;
+  payload: {
+    key: string;
+  };
+
+  getServiceConfig(): ServiceConfig {
     return {
-      customRequest: function(obj) {
-        // 在這裡不處理 firebase 的登入，
-        // 登入應該要在 canner-web 的 qaformContainer 完成
-        // 如果沒有登入 無法上傳
+      customRequest: function(obj: RequestObj) {
         const { file, onProgress, onSuccess, onError } = obj;
         const hash = randomString();
         const fileExtension = file.name.split('.').slice().pop();
-        const filename = `CANNER_CMS/${this.dir}/${file.name}-${hash}.${fileExtension}`;
+        const filename = `CANNER_CMS/${this.dir || 'UNDEFINED'}/${file.name}-${hash}.${fileExtension}`;
         const appId = config.getAppId();
         this.getSignedUrl({
           key: this.payload.key,
@@ -55,7 +70,12 @@ export default class FirebaseService extends ImageService {
     filepath,
     appId,
     contentType
-  }) {
+  }: {
+    key: string,
+    filepath: string,
+    appId: string,
+    contentType: string
+  }): Promise<*> {
     return axios.post(getStorageUrl(), {
       key,
       filepath,
@@ -68,11 +88,11 @@ export default class FirebaseService extends ImageService {
   }
 }
 
-function randomString() {
+function randomString(): string {
   return Math.random().toString(36).substr(2, 6);
 }
 
-function getStorageUrl() {
+function getStorageUrl(): string {
   switch (process.env.NODE_ENV) {
     case "production":
       return "https://backend.canner.io/storage";

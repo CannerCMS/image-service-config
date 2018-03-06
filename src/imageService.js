@@ -1,11 +1,28 @@
-export default class imageService {
-  constructor(config, payload) {
-    const { dir, filename } = config;
+// @flow
+
+type Config = {
+  service: 'imgur' | 'firebase',
+  dir?: string,
+}
+
+type Payload = {
+  [string]: any
+}
+
+type ServiceConfig = {
+  [string]: any
+}
+
+export default class ImageService {
+  dir: ?string;
+  payload: Payload;
+
+  constructor(config: Config, payload: Payload) {
+    const { dir } = config;
     this.dir = dir;
-    this.filename = filename;
     this.payload = payload;
   }
-  getServiceConfig() {
+  getServiceConfig(): ServiceConfig {
     return {};
   }
 }
