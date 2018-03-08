@@ -27,6 +27,7 @@ export type UploadConfig = {
   listType?: string,
   multiple?: boolean,
   name?: string,
+  // prettier-ignore
   showUploadList?: boolean
     | {
         showPreviewIcon?: boolean,
