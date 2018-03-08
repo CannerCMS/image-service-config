@@ -1,6 +1,6 @@
 // @flow
 
-import type { UploadConfig } from "../types";
+import type { UploadConfig } from "./types";
 
 export default class ImageService {
   hash: ?boolean;

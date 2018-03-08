@@ -11,15 +11,15 @@ export type CustomRequestArgs = {
   file: File,
   withCredentials: Boolean,
   action: String,
-  headers: Object,
-}
+  headers: Object
+};
 
 export type UploadConfig = {
   accept?: string,
   action?: string, // the form url,
   beforeUpload?: (file: File, fileList: Array<File>) => boolean | Promise<*>,
   customRequest?: CustomRequestArgs => void,
-  data?: Object | (File) => Object,
+  data?: Object | (File => Object),
   defaultFileList?: Array<Object>,
   disabled?: boolean,
   fileList?: Array<Object>,
@@ -27,13 +27,14 @@ export type UploadConfig = {
   listType?: string,
   multiple?: boolean,
   name?: string,
-  showUploadList?: boolean | {
-    showPreviewIcon?: boolean,
-    showRemoveIcon?: boolean
-  },
+  showUploadList?: boolean
+    | {
+        showPreviewIcon?: boolean,
+        showRemoveIcon?: boolean
+      },
   supportServerRender?: boolean,
   withCredentials?: boolean,
   onChange?: Function,
-  onPreview?: (File) => void,
-  onRemove?: (File) => boolean | Promise<*>,
-}
+  onPreview?: File => void,
+  onRemove?: File => boolean | Promise<*>
+};

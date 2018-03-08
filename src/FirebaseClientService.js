@@ -2,7 +2,7 @@
 
 import ImageService from "./imageService";
 import { randomString, splitFilename } from "./utils";
-import type { CustomRequestArgs } from "../types";
+import type { CustomRequestArgs } from "./types";
 
 export default class FirebaseService extends ImageService {
   firebase: any;
@@ -31,7 +31,9 @@ export default class FirebaseService extends ImageService {
     return {
       customRequest: function(obj: CustomRequestArgs) {
         const { file, onProgress, onSuccess, onError } = obj;
-        const { fileExtension, nameWithoutExtension} = splitFilename(file.name);
+        const { fileExtension, nameWithoutExtension } = splitFilename(
+          file.name
+        );
         let filename = this.filename || nameWithoutExtension;
         if (this.hash) {
           const hash = randomString();

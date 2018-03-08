@@ -3,7 +3,7 @@
 import ImageService from "./imageService";
 import axios from "axios";
 import Promise from "promise-polyfill";
-import type { CustomRequestArgs } from "../types";
+import type { CustomRequestArgs } from "./types";
 import { randomString, splitFilename } from "./utils";
 
 export default class FirebaseAdminService extends ImageService {
@@ -46,13 +46,17 @@ export default class FirebaseAdminService extends ImageService {
     return {
       customRequest: function(obj: CustomRequestArgs) {
         const { file, onProgress, onSuccess, onError } = obj;
-        const { fileExtension, nameWithoutExtension } = splitFilename(file.name);
+        const { fileExtension, nameWithoutExtension } = splitFilename(
+          file.name
+        );
         let filename = file.name;
         if (this.hash) {
           const hash = randomString();
-          filename = `${this.filename || nameWithoutExtension}-${hash}.${fileExtension}`;
+          filename = `${this.filename ||
+            nameWithoutExtension}-${hash}.${fileExtension}`;
         } else {
-          filename = `${this.filename || nameWithoutExtension}.${fileExtension}`;
+          filename = `${this.filename ||
+            nameWithoutExtension}.${fileExtension}`;
         }
         let filePath = this.dir ? `${this.dir}/${filename}` : filename;
         this.getSignedUrl(file, filePath)
@@ -65,7 +69,7 @@ export default class FirebaseAdminService extends ImageService {
                   const percent = done / total * 100;
                   onProgress({ percent });
                 },
-                headers:{
+                headers: {
                   "Content-Type": file.type,
                   "X-Upload-Content-Type": file.type,
                   "X-Upload-Content-Length": file.size

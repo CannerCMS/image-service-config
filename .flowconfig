@@ -1,5 +1,6 @@
 [ignore]
 .*/node_modules/antd/.*
+.*/node_modules/protobufjs/**
 docs/index.js
 
 [include]

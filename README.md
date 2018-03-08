@@ -1,5 +1,11 @@
-# Image Service Config
-> the image service configuration of antd upload: https://ant.design/components/upload/ with firebase admin adk , firebase web sdk, and imgur
+# image-service-config
+> Configuration for image services using antd uploader: https://ant.design/components/upload/
+
+Support platforms:
+
+- [Imgur](#imgurservice)
+- [Firebase client JS SDK](#firebaseclientservice)
+- [Firebase admin](##firebaseadminservice)
 
 ## Installation
 
@@ -7,9 +13,30 @@
 yarn add @canner/image-service
 npm i --save @canner/image-service
 ```
+
+## Usage
+
+```js
+const serviceConfig = imageService.getServiceConfig();
+
+class MyUpload extends React.Component {
+  render() {
+    return (
+      <Upload {...serviceConfig}>  // just pass `serviceConfig` to props, then your done!
+        <Button>
+          <Icon type="upload" /> upload
+        </Button>
+      </Upload>
+    );
+  }
+}
+```
+
 ## Support
 
-### ImgurService
+### ImgurService (Imgur)
+
+Imgur API support.
 
 #### args
 <table>
@@ -23,13 +50,13 @@ npm i --save @canner/image-service
     <td>clientId</td>
     <td>string</td>
     <td>''</td>
-    <td>(required) Your Imgur clientId, Docs: https://apidocs.imgur.com/</td>
+    <td>(required) Your Imgur's clientId, Docs: https://apidocs.imgur.com/</td>
   </tr>
   <tr>
     <td>mashapeKey</td>
     <td>string</td>
     <td>''</td>
-    <td>(optional) Your mashapeKey, Docs: https://market.mashape.com/imgur/imgur-9#image-upload </td>
+    <td>(optional) Your mashape's imgur key, Docs: https://market.mashape.com/imgur/imgur-9#image-upload </td>
   </tr>
 </table>
 
@@ -43,11 +70,13 @@ npm i --save @canner/image-service
   <tr>
     <td>getServiceConfig</td>
     <th><code>() => {name: "image", accept: "image/*", action: string, headers: Object}</code></th>
-    <td>return the uploading config for imgur</td>
+    <td>return the uploading configuration for imgur</td>
   </tr>
 </table>
 
 ```js
+import {ImgurService} from '@canner/image-service-config';
+
 const imageService = new ImgurService({
   clientId, // https://apidocs.imgur.com/
   mashapeKey // https://market.mashape.com/imgur/imgur-9#image-upload
@@ -66,7 +95,9 @@ console.log(serviceConfig);
 // }
 ```
 
-### FirebaseClientService
+### FirebaseClientService (Firebase JS SDK)
+
+Firebase client SDK support.
 
 #### args
 <table>
@@ -80,13 +111,13 @@ console.log(serviceConfig);
     <td>firebase</td>
     <td>Firebase</td>
     <td>''</td>
-    <td>(required) A authenticated Firebase Instance to upload image to firebase storage </td>
+    <td>(required) A authenticated Firebase instance to upload image to firebase storage </td>
   </tr>
   <tr>
     <td>filename</td>
     <td>string</td>
     <td>''</td>
-    <td>(optional) filename  without extension</td>
+    <td>(optional) filename without extension</td>
   </tr>
   <tr>
     <td>dir</td>
@@ -98,7 +129,7 @@ console.log(serviceConfig);
     <td>hash</td>
     <td>boolean</td>
     <td>false</td>
-    <td>(optional) if true, filename will be added a postfix hash, e.g.: filename-&lt;hash&gt;.png</td>
+    <td>(optional) if true, filename will add a postfix hash, e.g.: filename-&lt;hash&gt;.png</td>
   </tr>
 </table>
 
@@ -112,7 +143,7 @@ console.log(serviceConfig);
   <tr>
     <td>getServiceConfig</td>
     <th><code>() => {customRequest: Function}</code>. See https://github.com/react-component/upload#customrequest</th>
-    <td>return the uploading config for firebase client sdk </td>
+    <td>return the uploading configurations for firebase client sdk </td>
   </tr>
   <tr>
     <td>setHash</td>
@@ -132,7 +163,7 @@ console.log(serviceConfig);
 </table>
 
 ```js
-
+import {FirebaseClientService} from '@canner/image-service-config';
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -148,7 +179,7 @@ const imageService = new FirebaseClientService({
   firebase: firebase,
   dir: "the/path/to", // specify the path you want upload to 
   filename: "filename", // rename file without extension
-  hash: false, // if true, the filename will be added a hash string, e.g.: `filename-${hash}.jpg`
+  hash: false, // if true, the filename will add a hash string, e.g.: `filename-${hash}.jpg`
 });
 
 const serviceConfig = imageService.getServiceConfig();
@@ -160,7 +191,9 @@ console.log(serviceConfig);
 // }
 ```
 
-### FirebaseAdminService
+### FirebaseAdminService (Firebase admin SDK)
+
+Firebase admin SDK support.
 
 <table>
   <tr>
@@ -191,7 +224,7 @@ console.log(serviceConfig);
     <td>hash</td>
     <td>boolean</td>
     <td>false</td>
-    <td>(optional) if true, filename will be added a postfix hash, e.g.: filename-&lt;hash&gt;.png</td>
+    <td>(optional) if true, filename will add a postfix hash, e.g.: filename-&lt;hash&gt;.png</td>
   </tr>
 </table>
 
@@ -205,7 +238,7 @@ console.log(serviceConfig);
   <tr>
     <td>getServiceConfig</td>
     <th><code>() => {customRequest: Function}</code>. See https://github.com/react-component/upload#customrequest</th>
-    <td>return the uploading config for firebase admin sdk </td>
+    <td>return the uploading configurations for firebase admin sdk </td>
   </tr>
     <tr>
     <td>setHash</td>
@@ -225,6 +258,7 @@ console.log(serviceConfig);
 </table>
 
 ``` js
+import {FirebaseAdminService} from '@canner/image-service-config';
 
 function getSignedUrl(file, filePath) {
   // GET your API server
@@ -245,7 +279,7 @@ const imageService = new FirebaseAdminService({
   getSignedUrl,
   dir: "the/path/to", // specify the path you want upload to 
   filename: "filename", // rename file without extension
-  hash: false, // if true, the filename will be added a hash string, e.g.: `filename-${hash}.jpg`
+  hash: false, // if true, the filename will add a hash string, e.g.: `filename-${hash}.jpg`
 });
 
 const serviceConfig = imageService.getServiceConfig();
