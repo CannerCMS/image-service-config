@@ -10,8 +10,9 @@ Support platforms:
 ## Installation
 
 ```
-yarn add @canner/image-service
-npm i --save @canner/image-service
+yarn add @canner/image-service-config
+
+npm i --save @canner/image-service-config
 ```
 
 ## Usage
