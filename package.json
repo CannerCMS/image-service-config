@@ -6,7 +6,7 @@
   "scripts": {
     "build:flow": "flow-copy-source -v -i '**/test/**' src lib",
     "lint": "./node_modules/.bin/prettier --write ./src/**/*.js && eslint src",
-    "prepublish": "npm run clean && npm run check:src && npm run build:docs && npm run build",
+    "prepublish": "npm run clean && npm run check:src && npm run build",
     "check:src": "npm run lint",
     "clean": "rimraf lib dist",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
@@ -14,7 +14,6 @@
     "test": "cross-env BABEL_ENV=test karma start --single-run",
     "test:watch": "cross-env BABEL_ENV=test karma start",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --mode development",
-    "build:docs": "cross-env BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js --mode production",
     "validate": "npm ls"
   },
   "repository": {
