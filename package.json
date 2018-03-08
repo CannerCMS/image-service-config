@@ -1,0 +1,64 @@
+{
+  "name": "@canner/image-service-config",
+  "version": "0.1.1",
+  "description": "for image plugins to get service config ",
+  "main": "lib/index.js",
+  "scripts": {
+    "build:flow": "flow-copy-source -v -i '**/test/**' src lib",
+    "lint": "./node_modules/.bin/prettier --write ./src/**/*.js && eslint src",
+    "prepublish": "npm run clean && npm run check:src && npm run build:docs && npm run build",
+    "check:src": "npm run lint",
+    "clean": "rimraf lib dist",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build": "npm run build:commonjs && npm run build:flow",
+    "test": "cross-env BABEL_ENV=test karma start --single-run",
+    "test:watch": "cross-env BABEL_ENV=test karma start",
+    "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --mode development",
+    "build:docs": "cross-env BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js --mode production",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Canner/image-service-config.git"
+  },
+  "author": "canner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Canner/image-service-config/issues"
+  },
+  "homepage": "https://github.com/Canner/image-service-config#readme",
+  "dependencies": {
+    "@canner/canner-config": "^0.1.0",
+    "axios": "^0.17.1",
+    "promise-polyfill": "^7.0.0",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "peerDependencies": {
+    "@canner/canner-config": "^0.1.0"
+  },
+  "devDependencies": {
+    "antd": "^3.2.3",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-import": "^1.6.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.10",
+    "eslint": "^4.18.2",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "firebase": "^4.10.1",
+    "flow-bin": "^0.66.0",
+    "flow-copy-source": "^1.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "style-loader": "^0.20.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
+  }
+}

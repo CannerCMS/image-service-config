@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "flow",
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    ["import", {
+      "libraryName": "antd",
+      "style": "css"
+    }]
+  ]
+}
