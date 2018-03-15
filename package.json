@@ -1,6 +1,6 @@
 {
   "name": "@canner/image-service-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Configuration for image services using antd uploader",
   "main": "lib/index.js",
   "scripts": {
@@ -27,13 +27,9 @@
   },
   "homepage": "https://github.com/Canner/image-service-config#readme",
   "dependencies": {
-    "@canner/canner-config": "^0.1.0",
     "axios": "^0.17.1",
     "promise-polyfill": "^7.0.0",
     "whatwg-fetch": "^2.0.3"
-  },
-  "peerDependencies": {
-    "@canner/canner-config": "^0.1.0"
   },
   "devDependencies": {
     "antd": "^3.2.3",
