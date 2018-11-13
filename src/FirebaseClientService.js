@@ -56,9 +56,9 @@ export default class FirebaseService extends ImageService {
           function(e) {
             onError(e);
           },
-          function () {
+          function() {
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              onSuccess({data: {link: downloadURL}});
+              onSuccess({ data: { link: downloadURL } });
             });
           }
         );
